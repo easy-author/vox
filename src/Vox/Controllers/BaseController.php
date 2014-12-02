@@ -1,7 +1,6 @@
 <?php
 /**
- * @author Marco Troisi <marco.troisi@rocket-internet.de>
- * @copyright Copyright (c) 2014 Rocket Internet GmbH, Johannistraße 20, 10117 Berlin, http://www.rocket-internet.de
+ * @author Marco Troisi <hello@marcotroisi.com>
  * @created 02.12.14
  */
 
