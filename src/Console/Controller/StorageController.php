@@ -7,18 +7,21 @@ use Moss\Storage\StorageSchema;
 
 class StorageController extends ConsoleController
 {
-    /** @var StorageQuery */
-    protected $storage;
-
     /** @var StorageSchema */
     protected $schema;
 
+    /**
+     * Creates instance used in controller
+     */
     public function before()
     {
-        $this->storage = $this->app->get('storage');
         $this->schema = $this->app->get('schema');
     }
 
+    /**
+     * Gets entity names from request
+     * If no names provided - gets all from registered models
+     */
     protected function get()
     {
         $entities = (array) $this->app->request->query()
@@ -34,7 +37,14 @@ class StorageController extends ConsoleController
         return $entities;
     }
 
-    protected function check($entities)
+    /**
+     * Checks if storage has database entries for array of entities
+     * 
+     * @param array $entities
+     * 
+     * @return array
+     */
+    protected function check(array $entities)
     {
         $existing = array();
         $missing = array();
@@ -53,6 +63,14 @@ class StorageController extends ConsoleController
         return array($existing, $missing);
     }
 
+    /**
+     * Builds message structure
+     * 
+     * @param string $prefix
+     * @param array $collection
+     * 
+     * @return string
+     */
     protected function msg($prefix, array $collection)
     {
         $count = count($collection[2]);
@@ -72,6 +90,12 @@ class StorageController extends ConsoleController
         );
     }
 
+    /**
+     * Lists queries needed to create misssing database tables
+     * Add --force parameter to execute them
+     * 
+     * @return ResponseInterface
+     */
     public function createAction()
     {
         $collection = $this->check($this->get());
@@ -93,6 +117,12 @@ class StorageController extends ConsoleController
         return new Response($this->msg('Preview', $result), 200, 'text/plain; charset=UTF-8');
     }
 
+    /**
+     * Lists queries needed to update tables - this also includes creation of non existing ones
+     * Add --force parameter to execute them
+     * 
+     * @return ResponseInterface
+     */
     public function updateAction()
     {
         $collection = $this->check($this->get());
@@ -126,6 +156,12 @@ class StorageController extends ConsoleController
         return new Response($this->msg('Preview', $result), 200, 'text/plain; charset=UTF-8');
     }
 
+    /**
+     * Lists queries needed to drop all tables
+     * Add --force parameter to execute them
+     * 
+     * @return ResponseInterface
+     */
     public function dropAction()
     {
         $collection = $this->check($this->get());
