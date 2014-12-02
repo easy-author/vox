@@ -1,0 +1,35 @@
+{
+	"name": "vox-project/vox",
+	"version": "v0.1",
+	"description": "The publishing platform",
+	"keywords": [],
+	"type": "platform",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Marco Troisi",
+			"email": "hello@marcotroisi.com"
+		}
+	],
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"require": {
+		"php": ">=5.3.4",
+		"moss/framework": ">=1.0",
+		"moss/storage": ">=1",
+		"moss/locale": ">=1",
+		"moss/twig-bridge": ">=1"
+	},
+	"require-dev": {
+		"phpunit/phpunit": ">=3.7",
+		"behat/behat": ">=3.0.5",
+		"behat/mink-extension": "~2.0@dev",
+		"behat/mink-goutte-driver": "*"
+	},
+	"config": {
+		"bin-dir": "bin/"
+	},
+	"autoload": {
+		"psr-4": { "": "src/" }
+	}
+}
