@@ -2,14 +2,14 @@
 namespace Console\Controller;
 
 use Moss\Container\Container;
-use Moss\Kernel\App;
+use Moss\Kernel\AppInterface;
 
 class ConsoleController
 {
     /** @var Container */
     protected $app;
 
-    public function __construct(App $app)
+    public function __construct(AppInterface $app)
     {
         $this->app = & $app;
 
