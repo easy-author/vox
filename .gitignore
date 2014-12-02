@@ -14,6 +14,7 @@
 # For example, "doc/*.html" matches "doc/git.html" but not "doc/ppc/ppc.html" or "tools/perf/doc/perf.html".
 #
 # A leading slash matches the beginning of the pathname. For example, "/*.txt" matches "foo.txt" but not "bar/foo.txt".
-./idea
-./bin
-./vendor
+/.idea
+/vendor
+/bin
+/tools
