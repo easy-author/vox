@@ -4,7 +4,7 @@ require __DIR__ . '/../vendor/autoload.php';
 /**
  * Initialises Moss Framework
  */
-$moss = new \Moss\Kernel\App(require __DIR__ . '/../src/Vox/bootstrap.php');
+$moss = new \Moss\Kernel\App(require __DIR__ . '/../src/bootstrap.php');
 
 /**
  * Unleashes the power of Moss
