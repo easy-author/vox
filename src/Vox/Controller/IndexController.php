@@ -3,15 +3,15 @@
  * @author Marco Troisi <hello@marcotroisi.com>
  * @created 02.12.14
  */
-namespace Vox\Controllers;
+namespace Vox\Controller;
 
 use Moss\Http\Response\Response;
 
-class TestController extends BaseController {
+class IndexController extends BaseController {
 
     public function indexAction() {
 
-        return new Response('This is the test controller');
+        return new Response(__METHOD__);
 
     }
 
