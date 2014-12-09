@@ -15,7 +15,7 @@
 	"prefer-stable": true,
 	"require": {
 		"php": ">=5.3.4",
-		"moss/framework": ">=1.0",
+		"moss/framework": ">=1.1",
 		"moss/storage": ">=1",
 		"moss/locale": ">=1",
 		"moss/twig-bridge": ">=1"
