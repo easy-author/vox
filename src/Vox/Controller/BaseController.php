@@ -4,7 +4,7 @@
  * @created 02.12.14
  */
 
-namespace Vox\Controllers;
+namespace Vox\Controller;
 
 use Moss\Http\Response\Response;
 use Moss\Kernel\AppInterface;
