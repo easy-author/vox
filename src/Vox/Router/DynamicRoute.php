@@ -16,6 +16,12 @@ use Moss\Http\Router\Route;
  * Class DynamicRoute
  * Overloads Route and returns controller action from url as controller@action notation
  *
+ * Usage:
+ *     $router->register('dynamic', new \Vox\Router\DynamicRoute('/{controller}/({action})', null));
+ * When calling /Foo_Bar/yada
+ *     \Foo\BarController@yadaAction will be called
+ * If no action - indexAction will be called
+ *
  * @package Vox\Router
  */
 class DynamicRoute extends Route
