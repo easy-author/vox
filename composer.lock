@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b9e3c08b7ad03c048b937900926a3bf4",
+    "hash": "69d9ce8cc9bf1342a6aefd1582aa1eae",
     "packages": [
         {
             "name": "moss/framework",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/potfur/moss-framework.git",
-                "reference": "5472ddc84f9ccf4b0f3df3730e3cacd2c855fc2d"
+                "reference": "19d9089fbbcac20457ab7717605af4e4531f878c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/potfur/moss-framework/zipball/5472ddc84f9ccf4b0f3df3730e3cacd2c855fc2d",
-                "reference": "5472ddc84f9ccf4b0f3df3730e3cacd2c855fc2d",
+                "url": "https://api.github.com/repos/potfur/moss-framework/zipball/19d9089fbbcac20457ab7717605af4e4531f878c",
+                "reference": "19d9089fbbcac20457ab7717605af4e4531f878c",
                 "shasum": ""
             },
             "require": {
@@ -52,7 +52,7 @@
                 "framework",
                 "microframework"
             ],
-            "time": "2014-12-08 22:07:56"
+            "time": "2014-12-09 22:20:46"
         },
         {
             "name": "moss/locale",
@@ -149,16 +149,16 @@
         },
         {
             "name": "moss/twig-bridge",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/potfur/moss-twig-bridge.git",
-                "reference": "238fc458c7df90a0596ef499070f8a707c773b1c"
+                "reference": "042968cd3f8ad75e34223f2c1516004a1f9612dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/potfur/moss-twig-bridge/zipball/238fc458c7df90a0596ef499070f8a707c773b1c",
-                "reference": "238fc458c7df90a0596ef499070f8a707c773b1c",
+                "url": "https://api.github.com/repos/potfur/moss-twig-bridge/zipball/042968cd3f8ad75e34223f2c1516004a1f9612dc",
+                "reference": "042968cd3f8ad75e34223f2c1516004a1f9612dc",
                 "shasum": ""
             },
             "require": {
@@ -193,7 +193,7 @@
                 "moss",
                 "twig"
             ],
-            "time": "2014-11-30 22:37:10"
+            "time": "2014-12-26 12:12:24"
         },
         {
             "name": "twig/extensions",
@@ -249,16 +249,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.16.2",
+            "version": "v1.16.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "42f758d9fe2146d1f0470604fc05ee43580873fc"
+                "reference": "6dc11a1e8ecfc30e2c68aaeb218148409d8e68af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/42f758d9fe2146d1f0470604fc05ee43580873fc",
-                "reference": "42f758d9fe2146d1f0470604fc05ee43580873fc",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/6dc11a1e8ecfc30e2c68aaeb218148409d8e68af",
+                "reference": "6dc11a1e8ecfc30e2c68aaeb218148409d8e68af",
                 "shasum": ""
             },
             "require": {
@@ -293,7 +293,7 @@
                 },
                 {
                     "name": "Twig Team",
-                    "homepage": "https://github.com/fabpot/Twig/graphs/contributors",
+                    "homepage": "http://twig.sensiolabs.org/contributors",
                     "role": "Contributors"
                 }
             ],
@@ -302,7 +302,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2014-10-17 12:53:44"
+            "time": "2014-12-25 19:58:19"
         }
     ],
     "packages-dev": [
@@ -929,16 +929,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "2.0.13",
+            "version": "2.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "0e7d2eec5554f869fa7a4ec2d21e4b37af943ea5"
+                "reference": "ca158276c1200cc27f5409a5e338486bc0b4fc94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/0e7d2eec5554f869fa7a4ec2d21e4b37af943ea5",
-                "reference": "0e7d2eec5554f869fa7a4ec2d21e4b37af943ea5",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/ca158276c1200cc27f5409a5e338486bc0b4fc94",
+                "reference": "ca158276c1200cc27f5409a5e338486bc0b4fc94",
                 "shasum": ""
             },
             "require": {
@@ -990,7 +990,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-12-03 06:41:44"
+            "time": "2014-12-26 13:28:33"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2205,6 +2205,7 @@
         "behat/mink-extension": 20
     },
     "prefer-stable": true,
+    "prefer-lowest": false,
     "platform": {
         "php": ">=5.3.4"
     },

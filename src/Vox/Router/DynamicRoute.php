@@ -39,4 +39,24 @@ class DynamicRoute extends Route
             $this->arguments['action'] ?: 'index'
         );
     }
+
+    /**
+     * Creates route url
+     *
+     * @param string $host
+     * @param array  $arguments
+     *
+     * @return string
+     */
+    public function make($host, array $arguments = [])
+    {
+        if(isset($arguments['controller'])) {
+            $arguments['controller'] = trim($arguments['controller'], '\\');
+            $arguments['controller'] = preg_replace('/Controller$/','',$arguments['controller']);
+            $arguments['controller'] = str_replace('\\','_',$arguments['controller']);
+        }
+        return parent::make($host, $arguments);
+    }
+
+
 }
