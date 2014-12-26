@@ -1,6 +1,10 @@
 Feature: Login/Logout
   In order to add content I need to log in into administrative panel
 
+  Background:
+    Given user "test" with password "test" exists
+    And I am on the homepage
+
   Scenario: Log in with login and password
     Given I am on "admin/login"
     When I fill in the following:

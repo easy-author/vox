@@ -1,5 +1,5 @@
 <?php
-namespace Vox\Admin\Entity;
+namespace Vox\Entity;
 
 use Moss\Security\UserInterface;
 
@@ -18,13 +18,15 @@ class User implements UserInterface
     protected $id;
     protected $login;
 
-    protected $roles = array();
-    protected $rights = array();
+    protected $roles = [];
+    protected $rights = [];
 
-    public function __construct($id, $login)
+    public function __construct($id, $login, array $roles = [], array $rights = [])
     {
         $this->id = (int)$id;
         $this->login = $login;
+        $this->roles = $roles;
+        $this->rights = $rights;
     }
 
     /**

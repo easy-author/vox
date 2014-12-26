@@ -12,7 +12,7 @@ namespace Vox\Admin\Repository;
 
 use Moss\Security\TokenInterface;
 use Moss\Security\UserInterface;
-use Vox\Admin\Entity\User;
+use Vox\Entity\User;
 
 class UserRepository
 {
