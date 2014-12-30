@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "76ab0389450d21d0284072683e144a89",
+    "hash": "fc39b3afb381e0674a46e83ef843899b",
     "packages": [
         {
             "name": "moss/framework",
@@ -1894,7 +1894,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.3.4"
+        "php": ">=5.4.0"
     },
     "platform-dev": []
 }
