@@ -14,7 +14,7 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
-    "php": ">=5.3.4",
+    "php": ">=5.4.0",
     "moss/framework": ">=1.1",
     "moss/storage": ">=1",
     "moss/locale": ">=1",
