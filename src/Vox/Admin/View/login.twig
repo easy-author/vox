@@ -1,0 +1,25 @@
+{% extends 'Vox:Admin:index' %}
+
+{% block content %}
+    <section>
+        <h2>{% trans "Log in" %}</h2>
+
+        <form action="{{ url('admin.login.auth') }}" method="post">
+            <fieldset>
+                <ul class="inline">
+                    <li>
+                        <label for="login">{% trans "Login" %}</label>
+                        <input type="text" id="login" name="login" placeholder="{% trans "Login" %}" required="required">
+                    </li>
+                    <li>
+                        <label for="password">{% trans "Password" %}</label>
+                        <input type="password" id="password" name="password" placeholder="{% trans "Password" %}" required="required">
+                    </li>
+                    <li>
+                        <button type="submit">{% trans "Login" %}</button>
+                    </li>
+                </ul>
+            </fieldset>
+        </form>
+    </section>
+{% endblock %}

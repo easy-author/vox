@@ -1,0 +1,12 @@
+{% if collection %}
+    <ul>
+        {% for item in collection %}
+            <li>
+                <a href="{{ url(item.route) }}" {% if item.selected %}class="selected"{% endif %}>{{ item.title|translate }}</a>
+                {% if item.children is not empty %}
+                    {% include 'Vox:Admin:menu' with { collection: item.children } %}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
