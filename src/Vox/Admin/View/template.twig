@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <base href="{{ request.baseName }}">
+
+    <meta charset="utf-8">
+    <title>{% trans "Admin" %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="/web/css/bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="/web/css/styles.css" rel="stylesheet">
+
+    {% block style %}
+    {% endblock %}
+</head>
+<body>
+<div class="wrapper">
+    <div class="box">
+        <div class="row">
+
+            <!-- sidebar -->
+            <div class="column col-sm-3" id="sidebar">
+                <a class="logo" href="#">B</a>
+                <ul class="nav">
+                    <li class="active"><a href="#featured">Featured</a>
+                    </li>
+                    <li><a href="#stories">Stories</a>
+                    </li>
+                </ul>
+                <ul class="nav hidden-xs" id="sidebar-footer">
+                    <li>
+                        <a href="http://www.bootply.com"><h3>Basis</h3>Made with <i class="glyphicon glyphicon-heart-empty"></i> by Bootply</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /sidebar -->
+
+            <!-- main -->
+            <div class="column col-sm-9" id="main">
+                <div class="padding">
+                    <div class="full col-sm-9">
+
+                        {% block content %}
+                        {% endblock %}
+
+
+                    </div><!-- /col-9 -->
+                </div><!-- /padding -->
+            </div>
+            <!-- /main -->
+
+        </div>
+    </div>
+</div>
+<!-- script references -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+{% block script %}
+{% endblock %}
+
+</body>
+</html>
