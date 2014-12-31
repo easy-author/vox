@@ -28,7 +28,9 @@ class BaseController
 
     public function indexAction()
     {
-        return new Response(sprintf('<a href="%s">Logout</a>', $this->app->router()->make('admin.logout')));
+        $this->view->template('Vox:Admin:index');
+
+        return new Response($this->view->render());
     }
 
     public function loginAction()
@@ -64,5 +66,14 @@ class BaseController
         $this->security->destroy();
 
         return new ResponseRedirect($this->app->router()->make('admin'));
+    }
+
+    public function michalAction()
+    {
+        return new Response(
+            json_encode(['test' => 'michal']),
+            200,
+            'application/json'
+        );
     }
 } 
