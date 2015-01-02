@@ -1,0 +1,7 @@
+suites:
+    vox_suite:
+        namespace: Vox
+        spec_prefix: spec
+        src_path: src
+        spec_path:
+        psr4_prefix:
