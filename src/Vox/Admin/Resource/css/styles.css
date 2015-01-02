@@ -71,6 +71,7 @@ a {
 #sidebar a.logo {
   display:block;
   padding:3px;
+  background-color:#fff;
   color:#777777;
   height:40px;
   width:40px;

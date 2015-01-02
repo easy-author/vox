@@ -1,25 +1,30 @@
-{% extends 'Vox:Admin:template' %}
+{#{% extends 'Vox:Admin:template' %}#}
+<link href="/web/css/bootstrap.min.css" rel="stylesheet">
 
 {% block content %}
-    <section>
-        <h2>{% trans "Log in" %}</h2>
+    <section class="center-block" style="text-align: center;">
+        <div class="page-header">
 
-        <form action="{{ url('admin.login.auth') }}" method="post">
-            <fieldset>
-                <ul class="inline">
-                    <li>
-                        <label for="login">{% trans "Login" %}</label>
-                        <input type="text" id="login" name="login" placeholder="{% trans "Login" %}" required="required">
-                    </li>
-                    <li>
-                        <label for="password">{% trans "Password" %}</label>
-                        <input type="password" id="password" name="password" placeholder="{% trans "Password" %}" required="required">
-                    </li>
-                    <li>
-                        <button type="submit">{% trans "Login" %}</button>
-                    </li>
-                </ul>
-            </fieldset>
+            <img src="/web/images/logo.png">
+        </div>
+
+        <form action="{{ url('admin.login.auth') }}" method="post" class="form-inline">
+
+            <div class="form-group">
+                <label class="sr-only" for="login">{% trans "Login" %}</label>
+                <input type="text" class="form-control" id="login" name="login" placeholder="{% trans "Login" %}" required="required">
+            </div>
+
+            <div class="form-group">
+                <label class="sr-only" for="password">{% trans "Password" %}</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="{% trans "Password" %}" required="required">
+
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">{% trans "Login" %}</button>
+            </div>
+
         </form>
     </section>
 {% endblock %}
