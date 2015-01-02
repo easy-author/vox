@@ -9,9 +9,9 @@ namespace Vox\Admin\Controller;
 use Moss\Http\Response\Response;
 use Moss\Http\Response\ResponseRedirect;
 use Moss\Kernel\AppInterface;
-use Vox\Admin\Core\CssManager;
-use Vox\Admin\Core\JsManager;
-use Vox\Admin\Core\ImageManager;
+use Vox\Core\CssManager;
+use Vox\Core\JsManager;
+use Vox\Core\ImageManager;
 
 class BaseController
 {

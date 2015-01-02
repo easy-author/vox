@@ -4,10 +4,13 @@
  * @created 02.01.15
  */
 
-namespace Vox\Admin\Core;
+namespace Vox\Core;
 
 
-class JsManager implements ResourceInterface {
+class CssManager implements ResourceInterface {
+
+
+
     /**
      * Registers the files
      *
