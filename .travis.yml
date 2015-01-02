@@ -11,8 +11,8 @@ before_script:
   - sleep 3
 
 script:
-  - ./bin/phpspec run
-  - ./bin/behat --config ./behat.yml --profile travis
+  - ./bin/phpspec run --config phpspec.dist.yml
+  - ./bin/behat --config behat.dist.yml --profile travis
 #  - phpunit --coverage-clover=coverage.clover
 #  - wget https://scrutinizer-ci.com/ocular.phar
 #  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover

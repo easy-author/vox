@@ -102,7 +102,11 @@ return [
             'pattern' => '/admin/',
             'controller' => 'Vox\Admin\Controller\BaseController@indexAction',
         ],
-//        'adminDynamic' => new \Vox\Router\DynamicRoute('/admin/{controller}/({action})', null), // TODO - this should be enabled on Moss 1.2
+// TODO - this should be enabled on Moss 1.2
+//        'adminDynamic' => new \Vox\Router\DynamicRoute(
+//            '/admin/{controller}/({action})',
+//            '\\Vox\\Admin\\Controller\\{controller}Controller@{action}Action'
+//        ),
         'admin.login.form' => [
             'pattern' => '/admin/login/',
             'controller' => 'Vox\Admin\Controller\BaseController@loginAction',
