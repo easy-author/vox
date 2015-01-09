@@ -7,7 +7,11 @@
 namespace Vox\Core;
 
 
-class JsManager implements ResourceInterface {
+class JsManager implements ResourceInterface
+{
+
+    protected $files;
+
     /**
      * Registers the files
      *
@@ -16,7 +20,11 @@ class JsManager implements ResourceInterface {
      */
     public function register($files)
     {
-        // TODO: Implement register() method.
+        if (is_array($files)) {
+            $this->files = array_merge($this->files, $files);
+        } else {
+            $this->files[] = $files;
+        }
     }
 
     /**
@@ -26,7 +34,12 @@ class JsManager implements ResourceInterface {
      */
     public function serve()
     {
-        // TODO: Implement serve() method.
+        $js = "";
+        foreach ($this->files as $file) {
+            $js .= '<link href="'.$file.'" rel="stylesheet">';
+        }
+
+        return $js;
     }
 
 }

@@ -7,9 +7,10 @@
 namespace Vox\Core;
 
 
-class CssManager implements ResourceInterface {
+class CssManager implements ResourceInterface
+{
 
-
+    protected $files;
 
     /**
      * Registers the files
@@ -19,7 +20,11 @@ class CssManager implements ResourceInterface {
      */
     public function register($files)
     {
-        // TODO: Implement register() method.
+        if (is_array($files)) {
+            $this->files = array_merge($this->files, $files);
+        } else {
+            $this->files[] = $files;
+        }
     }
 
     /**
@@ -29,7 +34,12 @@ class CssManager implements ResourceInterface {
      */
     public function serve()
     {
-        // TODO: Implement serve() method.
+        $css = "";
+        foreach ($this->files as $file) {
+            $css .= '<link href="'.$file.'" rel="stylesheet">';
+        }
+
+        return $css;
     }
 
 }
