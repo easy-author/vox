@@ -12,7 +12,7 @@ namespace Vox\Admin\Repository;
 
 use Moss\Security\TokenInterface;
 use Moss\Security\UserInterface;
-use Moss\Storage\Query\Query;
+use Moss\Storage\Query\StorageInterface;
 use Vox\Entity\User;
 
 class UserRepository
@@ -20,18 +20,18 @@ class UserRepository
     const RANDOM_DOMAIN = '123456789ABCDEFGHJKLMNPQRSTUVWXYZ';
 
     /**
-     * @var Query
+     * @var StorageInterface
      */
-    protected $query;
+    protected $storage;
 
     /**
      * Constructor
      *
-     * @param Query $query
+     * @param StorageInterface $storage
      */
-    public function __construct(Query $query)
+    public function __construct(StorageInterface $storage)
     {
-        $this->query = $query;
+        $this->storage = $storage;
     }
 
     /**
@@ -60,7 +60,7 @@ class UserRepository
      */
     public function getUserByCredentials($login, $password)
     {
-        $query = $this->query->readOne('user')->where('login', $login);
+        $query = $this->storage->readOne('user')->where('login', $login);
         if (!$query->count()) {
             return null;
         }
@@ -83,7 +83,7 @@ class UserRepository
      */
     public function getUserByToken(TokenInterface $token)
     {
-        $query = $this->query->readOne('user')->where('token', $token->authenticate());
+        $query = $this->storage->readOne('user')->where('token', $token->authenticate());
         if (!$query->count()) {
             return null;
         }
@@ -162,7 +162,7 @@ class UserRepository
      */
     public function write(User $user)
     {
-        $this->query->write($user)->execute();
+        $this->storage->write($user)->execute();
 
         return true;
     }

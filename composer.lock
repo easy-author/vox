@@ -581,12 +581,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/potfur/moss-storage.git",
-                "reference": "682d17a33aa149f14ec0ac3a2fdee8b5e9e431ec"
+                "reference": "1dc3488d79b061f18a20fc5586bddd4fe2a835b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/potfur/moss-storage/zipball/682d17a33aa149f14ec0ac3a2fdee8b5e9e431ec",
-                "reference": "682d17a33aa149f14ec0ac3a2fdee8b5e9e431ec",
+                "url": "https://api.github.com/repos/potfur/moss-storage/zipball/1dc3488d79b061f18a20fc5586bddd4fe2a835b5",
+                "reference": "1dc3488d79b061f18a20fc5586bddd4fe2a835b5",
                 "shasum": ""
             },
             "require": {
@@ -624,7 +624,7 @@
                 "orm",
                 "storage"
             ],
-            "time": "2015-02-22 22:21:54"
+            "time": "2015-02-24 23:20:08"
         },
         {
             "name": "moss/twig-bridge",

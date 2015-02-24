@@ -35,7 +35,7 @@ return array(
         ),
         'storage' => array(
             'component' => function (ContainerInterface $container) {
-                return new \Moss\Storage\Query\Query(
+                return new \Moss\Storage\Query\Storage(
                     $container->get('storage:connection'),
                     $container->get('storage:modelbag')
                 );
@@ -51,7 +51,7 @@ return array(
                         new Field('id', 'integer', ['autoincrement']),
                         new Field('login', 'string', ['length' => 128]),
                         new Field('hash', 'string', ['length' => 255]),
-                        new Field('token', 'string', ['length' => 255]),
+                        new Field('token', 'string', ['null', 'length' => 255]),
                     ],
                     [
                         new Primary(['id']),
