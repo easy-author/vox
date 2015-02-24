@@ -17,16 +17,30 @@ class User implements UserInterface
 
     protected $id;
     protected $login;
+    protected $hash;
+
+    protected $token;
 
     protected $roles = [];
     protected $rights = [];
 
-    public function __construct($id, $login, array $roles = [], array $rights = [])
+    public function __construct($id = null, $login = null, array $roles = [], array $rights = [])
     {
-        $this->id = (int)$id;
-        $this->login = $login;
-        $this->roles = $roles;
-        $this->rights = $rights;
+        if ($id !== null) {
+            $this->id = $id;
+        }
+
+        if ($login !== null) {
+            $this->login = $login;
+        }
+
+        if ($roles !== []) {
+            $this->roles = $roles;
+        }
+
+        if ($rights !== []) {
+            $this->rights = $rights;
+        }
     }
 
     /**
@@ -37,6 +51,46 @@ class User implements UserInterface
     public function identify()
     {
         return $this->id;
+    }
+
+    /**
+     * Sets password hash
+     *
+     * @param string $hash
+     */
+    public function setHash($hash)
+    {
+        $this->hash = (string) $hash;
+    }
+
+    /**
+     * Returns password hash
+     *
+     * @return string
+     */
+    public function getHash()
+    {
+        return $this->hash;
+    }
+
+    /**
+     * Sets token
+     *
+     * @param string $token
+     */
+    public function setToken($token)
+    {
+        $this->token = (string) $token;
+    }
+
+    /**
+     * Return token string
+     *
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
     }
 
     /**

@@ -12,7 +12,7 @@ return [
             'upload' => __DIR__ . '/../../web/upload/'
         ],
         'view' => [
-            'component' => function (Moss\Container\Container $container) {
+            'component' => function (ContainerInterface $container) {
                 $options = [
                     'debug' => true,
                     'auto_reload' => true,
@@ -39,16 +39,11 @@ return [
                 return $view;
             }
         ],
-        'userRepository' => [
-            'component' => function (ContainerInterface $container) {
-                return new \Vox\Admin\Repository\UserRepository();
-            }
-        ],
         'security' => [
             'component' => function (ContainerInterface $container) {
                 $stash = new \Moss\Security\TokenStash($container->get('session'));
 
-                $provider = new \Vox\Admin\Model\UserModel($container->get('userRepository'));
+                $provider = new \Vox\Admin\Model\UserModel($container->get('repository:user'));
 
                 $url = $container
                     ->get('router')
@@ -69,6 +64,11 @@ return [
             },
             'shared' => true
         ],
+        'repository:user' => [
+            'component' => function (ContainerInterface $container) {
+                return new \Vox\Admin\Repository\UserRepository($container->get('storage'));
+            }
+        ],
     ],
     'dispatcher' => [
         'kernel.route' => [
@@ -82,7 +82,7 @@ return [
                         ->authorize($request);
 
                     return null;
-                } catch (\Exception $e) {
+                } catch (\Moss\Security\SecurityException $e) {
                     $response = new \Moss\Http\Response\ResponseRedirect($security->loginUrl());
                     $response->content($e->getMessage());
 

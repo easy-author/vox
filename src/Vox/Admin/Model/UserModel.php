@@ -54,17 +54,17 @@ class UserModel implements UserProviderInterface
      */
     public function tokenize(array $credentials)
     {
-        if(!$this->supportsCredentials($credentials)) {
+        if (!$this->supportsCredentials($credentials)) {
             return false;
         }
 
-        if(!$user = $this->repository->getUserByCredentials($credentials['login'], $credentials['password'])) {
+        if (!$user = $this->repository->getUserByCredentials($credentials['login'], $credentials['password'])) {
             return false;
         }
 
-        $token = $this->repository->generateToken($user);
+        $tokenString = $this->repository->generateToken($user);
 
-        return new Token($token, $user->identify());
+        return new Token($tokenString, $user->identify());
     }
 
     /**
@@ -88,11 +88,11 @@ class UserModel implements UserProviderInterface
      */
     public function authenticate(TokenInterface $token)
     {
-        if(!$token->isAuthenticated()) {
+        if (!$token->isAuthenticated()) {
             return false;
         }
 
-        if(!$this->repository->getUserByToken($token)) {
+        if (!$this->repository->getUserByToken($token)) {
             return false;
         }
 
