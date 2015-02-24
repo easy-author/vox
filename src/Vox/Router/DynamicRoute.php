@@ -11,13 +11,22 @@ namespace Vox\Router;
 */
 
 use Moss\Http\Router\Route;
+use Moss\Http\Router\RouteException;
 
 /**
  * Class DynamicRoute
  * Overloads Route and returns controller action from url as controller@action notation
  *
  * Usage:
- *     $router->register('dynamic', new \Vox\Router\DynamicRoute('/{controller}/({action})', null));
+ *     $router->register(
+ *          'dynamic',
+ *          new \Vox\Router\DynamicRoute(
+ *              '/admin/{controller}/({action})',
+ *              '\\Vox\\Admin\\Controller\\{controller}Controller@{action}Action',
+ *              [],
+ *              []
+ *          )
+ *      );
  * When calling /Foo_Bar/yada
  *     \Foo\BarController@yadaAction will be called
  * If no action - indexAction will be called
@@ -27,16 +36,31 @@ use Moss\Http\Router\Route;
 class DynamicRoute extends Route
 {
     /**
+     * Constructor for dynamic routing
+     *
+     * @param string $uriPattern
+     * @param string $controllerPattern
+     * @param array $arguments
+     * @param array $methods
+     */
+    public function __construct($uriPattern, $controllerPattern, array $arguments = [], array $methods = [])
+    {
+        parent::__construct($uriPattern, $controllerPattern, $arguments, $methods);
+    }
+
+
+    /**
      * Returns controller
      *
      * @return string|callable
      */
     public function controller()
     {
-        return sprintf(
-            '%sController@%sAction',
-            str_replace('_', '\\', $this->arguments['controller']),
-            $this->arguments['action'] ?: 'index'
+        return strtr(
+            $this->controller, [
+                '{controller}' => $this->arguments['controller'],
+                '{action}' => $this->arguments['action'] ?: 'index'
+            ]
         );
     }
 
@@ -44,19 +68,27 @@ class DynamicRoute extends Route
      * Creates route url
      *
      * @param string $host
-     * @param array  $arguments
+     * @param array $arguments
      *
      * @return string
+     * @throws RouteException
      */
     public function make($host, array $arguments = [])
     {
-        if(isset($arguments['controller'])) {
-            $arguments['controller'] = trim($arguments['controller'], '\\');
-            $arguments['controller'] = preg_replace('/Controller$/','',$arguments['controller']);
-            $arguments['controller'] = str_replace('\\','_',$arguments['controller']);
+        if(!empty($arguments) && $arguments == array_values($arguments)) {
+            $arguments['controller'] = $arguments[0];
+            unset($arguments[0]);
+
+            if(isset($arguments[1])) {
+                $arguments['action'] = $arguments[1];
+                unset($arguments[1]);
+            }
         }
+
+        if(empty($arguments['controller'])) {
+            throw new RouteException('Missing required controller argument');
+        }
+
         return parent::make($host, $arguments);
     }
-
-
 }
