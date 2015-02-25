@@ -7,12 +7,12 @@ php:
 before_script:
   - composer self-update
   - composer install --prefer-dist
+  - mysql -e 'create database IF NOT EXISTS test;'
   - php -S localhost:8080 ./web/index.php &
+  - php ./web/index.php database:configure --database=test --user=root --host=127.0.0.1
+  - php ./web/index.php database:create
+  - php ./web/index.php fixtures:user
   - sleep 3
-
 script:
   - ./bin/phpspec run --config phpspec.dist.yml
   - ./bin/behat --config behat.dist.yml --profile travis
-#  - phpunit --coverage-clover=coverage.clover
-#  - wget https://scrutinizer-ci.com/ocular.phar
-#  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover

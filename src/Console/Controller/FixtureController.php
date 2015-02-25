@@ -1,22 +1,10 @@
 <?php
 namespace Console\Controller;
 
-use Moss\Storage\Query\Query;
 use Vox\Admin\Repository\UserRepository;
 
 class FixtureController extends ConsoleController
 {
-    /** @var Query */
-    protected $storage;
-
-    /**
-     * Creates instance used in controller
-     */
-    public function before()
-    {
-        $this->storage = $this->app->get('storage');
-    }
-
     /**
      * Builds message structure
      *

@@ -18,5 +18,4 @@
 /vendor
 /bin
 /tools
-/src/Vox/bootstrap.db.connection.php
 /behat.dev.yml

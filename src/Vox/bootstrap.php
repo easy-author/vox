@@ -4,12 +4,12 @@ use Moss\Container\ContainerInterface;
 return [
     'container' => [
         'path' => [
-            'app' => __DIR__ . '/../../src/',
-            'base' => __DIR__ . '/../../',
-            'cache' => __DIR__ . '/../../var/cache/',
-            'compile' => __DIR__ . '/../../var/compile/',
-            'public' => __DIR__ . '/../../web/',
-            'upload' => __DIR__ . '/../../web/upload/'
+            'app' => __DIR__ . '/../../src',
+            'base' => __DIR__ . '/../..',
+            'cache' => __DIR__ . '/../../var/cache',
+            'compile' => __DIR__ . '/../../var/compile',
+            'public' => __DIR__ . '/../../web',
+            'upload' => __DIR__ . '/../../web/upload'
         ],
         'view' => [
             'component' => function (ContainerInterface $container) {

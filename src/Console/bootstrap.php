@@ -14,6 +14,11 @@ return array(
         )
     ),
     'router' => array(
+        'database:configure' => array(
+            'pattern' => 'database:configure',
+            'controller' => 'Console\Controller\StorageController@configureAction',
+            'methods' => array('cli'),
+        ),
         'database:create' => array(
             'pattern' => 'database:create',
             'controller' => 'Console\Controller\StorageController@createAction',
