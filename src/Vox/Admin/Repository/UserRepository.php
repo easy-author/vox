@@ -56,18 +56,18 @@ class UserRepository
      * @param string $login
      * @param string $password
      *
-     * @return UserInterface
+     * @return bool|UserInterface
      */
     public function getUserByCredentials($login, $password)
     {
         $query = $this->storage->readOne('user')->where('login', $login);
         if (!$query->count()) {
-            return null;
+            return false;
         }
 
         $user = $query->execute();
         if (!$this->isPasswordValid($user, $password)) {
-            return null;
+            return false;
         }
 
         return $user;
@@ -85,7 +85,7 @@ class UserRepository
     {
         $query = $this->storage->readOne('user')->where('token', $token->authenticate());
         if (!$query->count()) {
-            return null;
+            return false;
         }
 
         return $query->execute();
