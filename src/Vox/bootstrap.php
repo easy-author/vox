@@ -73,8 +73,12 @@ return [
     'dispatcher' => [
         'kernel.route' => [
             function (ContainerInterface $container) {
-                $security = $container->get('security');
                 $request = $container->get('request');
+                if ($request->method() === 'CLI') {
+                    return null;
+                }
+
+                $security = $container->get('security');
 
                 try {
                     $security
