@@ -18,6 +18,7 @@ use Vox\Entity\User;
 class UserRepository
 {
     const RANDOM_DOMAIN = '123456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+    const ITERATIONS = 7;
 
     /**
      * @var StorageInterface
@@ -137,7 +138,22 @@ class UserRepository
      */
     public function getHashedPassword($password)
     {
-        return password_hash((string) $password, PASSWORD_DEFAULT);
+        return crypt($password, $this->generateSalt());
+    }
+    /**
+     * Generates salt
+     *
+     * @return string
+     */
+    protected function generateSalt()
+    {
+        $randomized = [];
+        for ($i = 0; $i < 32; ++$i) {
+            $randomized[] = pack('S', mt_rand(0, 0xffff));
+        }
+        $randomized[] = substr(microtime(), 2, 6);
+
+        return '$2a$' . str_pad(self::ITERATIONS, 2, '0', STR_PAD_RIGHT) . '$' . strtr(substr(base64_encode(implode($randomized)), 0, 25), array('+' => '.')) . '$';
     }
 
     /**
@@ -150,7 +166,7 @@ class UserRepository
      */
     public function isPasswordValid(User $user, $password)
     {
-        return password_verify($password, $user->getHash());
+        return $user->getHash() === crypt($password, $user->getHash());
     }
 
     /**

@@ -8,10 +8,10 @@ before_script:
   - composer self-update
   - composer install --prefer-dist
   - mysql -e 'create database IF NOT EXISTS test;'
-  - php -S localhost:8080 ./web/index.php &
   - php ./web/index.php database:configure --database=test --user=root --host=127.0.0.1
-  - php ./web/index.php database:create
+  - php ./web/index.php database:create --force
   - php ./web/index.php fixtures:user
+  - php -S localhost:8080 ./web/index.php &
   - sleep 3
 script:
   - ./bin/phpspec run --config phpspec.dist.yml
