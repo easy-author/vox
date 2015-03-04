@@ -4,10 +4,10 @@ namespace spec\Vox\Admin\Model;
 
 use Moss\Security\Token;
 use Moss\Security\TokenInterface;
-use Moss\Security\UserInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Vox\Admin\Repository\UserRepository;
+use Vox\Entity\User;
 
 class UserModelSpec extends ObjectBehavior
 {
@@ -41,7 +41,7 @@ class UserModelSpec extends ObjectBehavior
         $this->supportsToken($token)->shouldReturn(true);
     }
 
-    public function it_should_return_token_for_valid_credentials(UserRepository $repository, UserInterface $user, TokenInterface $token)
+    public function it_should_return_token_for_valid_credentials(UserRepository $repository, User $user, TokenInterface $token)
     {
         $repository->getUserByCredentials('test', 'test')->willReturn($user);
         $repository->generateToken($user)->willReturn($token);
@@ -49,7 +49,7 @@ class UserModelSpec extends ObjectBehavior
         $this->tokenize(['login' => 'test', 'password' => 'test'])->shouldReturnAnInstanceOf('Moss\Security\TokenInterface');
     }
 
-    public function it_should_authenticate_token(UserRepository $repository, UserInterface $user, TokenInterface $token)
+    public function it_should_authenticate_token(UserRepository $repository, User $user, TokenInterface $token)
     {
         $token->isAuthenticated()->willReturn(true);
 
@@ -58,7 +58,7 @@ class UserModelSpec extends ObjectBehavior
         $this->authenticate($token)->shouldReturn(true);
     }
 
-    public function it_should_return_user(UserRepository $repository, UserInterface $user, TokenInterface $token)
+    public function it_should_return_user(UserRepository $repository, User $user, TokenInterface $token)
     {
         $repository->getUserByToken($token)->willReturn($user);
 

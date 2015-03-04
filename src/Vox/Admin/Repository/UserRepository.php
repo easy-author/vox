@@ -12,15 +12,42 @@ namespace Vox\Admin\Repository;
 
 use Moss\Security\TokenInterface;
 use Moss\Security\UserInterface;
+use Moss\Storage\Query\StorageInterface;
 use Vox\Entity\User;
 
 class UserRepository
 {
-    private $fakeTokenString = 'HashedTokenString';
+    const RANDOM_DOMAIN = '123456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+    const ITERATIONS = 7;
 
-    private function createFakeUser()
+    /**
+     * @var StorageInterface
+     */
+    protected $storage;
+
+    /**
+     * Constructor
+     *
+     * @param StorageInterface $storage
+     */
+    public function __construct(StorageInterface $storage)
     {
-        return new User(1, 'test');
+        $this->storage = $storage;
+    }
+
+    /**
+     * Creates and returns new user instance
+     *
+     * @param int    $id
+     * @param string $login
+     * @param array  $roles
+     * @param array  $rights
+     *
+     * @return User
+     */
+    public function create($id, $login, $roles = [], $rights = [])
+    {
+        return new User($id, $login, $roles, $rights);
     }
 
     /**
@@ -34,11 +61,17 @@ class UserRepository
      */
     public function getUserByCredentials($login, $password)
     {
-        if($login !== 'test' || $password !== 'test') {
+        $query = $this->storage->readOne('user')->where('login', $login);
+        if (!$query->count()) {
             return false;
         }
 
-        return $this->createFakeUser();
+        $user = $query->execute();
+        if (!$this->isPasswordValid($user, $password)) {
+            return false;
+        }
+
+        return $user;
     }
 
     /**
@@ -47,27 +80,106 @@ class UserRepository
      *
      * @param TokenInterface $token
      *
-     * @return bool|UserInterface
+     * @return UserInterface
      */
     public function getUserByToken(TokenInterface $token)
     {
-        if($token->authenticate() !== $this->fakeTokenString) {
+        $query = $this->storage->readOne('user')->where('token', $token->authenticate());
+        if (!$query->count()) {
             return false;
         }
 
-        return $this->createFakeUser();
+        return $query->execute();
     }
 
     /**
      * Generates token string for set user
      * Associates user with that token
      *
-     * @param UserInterface $user
+     * @param User $user
      *
      * @return string
      */
-    public function generateToken(UserInterface $user)
+    public function generateToken(User $user)
     {
-        return $this->fakeTokenString;
+        $token = $this->getRandomString(64);
+        $user->setToken($token);
+        $this->write($user);
+
+        return $token;
+    }
+
+    /**
+     * generate random string
+     *
+     * @param int    $length
+     * @param string $chars
+     *
+     * @return string
+     */
+    public function getRandomString($length, $chars = self::RANDOM_DOMAIN)
+    {
+        $str = '';
+        $domainLength = strlen($chars) - 1;
+
+        while ($length-- >= 0) {
+            $str .= $chars[mt_rand(0, $domainLength)];
+        }
+
+        return $str;
+    }
+
+    /**
+     * Returns password hash
+     *
+     * @param string $password
+     *
+     * @return string
+     */
+    public function getHashedPassword($password)
+    {
+        return crypt($password, $this->generateSalt());
+    }
+    /**
+     * Generates salt
+     *
+     * @return string
+     */
+    protected function generateSalt()
+    {
+        $randomized = [];
+        for ($i = 0; $i < 32; ++$i) {
+            $randomized[] = pack('S', mt_rand(0, 0xffff));
+        }
+        $randomized[] = substr(microtime(), 2, 6);
+
+        return '$2a$' . str_pad(self::ITERATIONS, 2, '0', STR_PAD_RIGHT) . '$' . strtr(substr(base64_encode(implode($randomized)), 0, 25), array('+' => '.')) . '$';
+    }
+
+    /**
+     * Returns true if password is valid
+     *
+     * @param User   $user
+     * @param string $password
+     *
+     * @return bool
+     */
+    public function isPasswordValid(User $user, $password)
+    {
+        return $user->getHash() === crypt($password, $user->getHash());
+    }
+
+    /**
+     * Writes entity into database
+     *
+     * @param User $user
+     *
+     * @return bool
+     */
+    public function write(User $user)
+    {
+        $this->storage->write($user)->execute();
+
+        return true;
     }
 }
