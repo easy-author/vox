@@ -5,14 +5,9 @@ voxControllers.controller('PostListCtrl', ['$scope', '$http',
 
         $scope.posts = [];
 
-        //$http.get('/posts/get').success(function(data) {
-        //    $scope.posts = data;
-        //});
-
-        $scope.posts = [
-            { id: 1, title: "First Post on Vox", author: "Mario Rossi", author_id: 1, excerpt: "Here we are! Finally this is my first post on Vox and I am so happy that...", date: "08/01/2015" },
-            { id: 2, title: "Second Post on Vox", author: "Lukas Schneider", author_id: 2, excerpt: "Well this is already my second post and so you already know that...", date: "11/01/2015" }
-        ];
+        $http.get('/admin/post/list').success(function(data) {
+            $scope.posts = data;
+        });
 
         /**
          * Returns Author's profile picture
@@ -27,9 +22,35 @@ voxControllers.controller('PostListCtrl', ['$scope', '$http',
 
     }]);
 
-voxControllers.controller('PostCtrl', ['$scope', '$routeParams',
-    function($scope, $routeParams) {
+voxControllers.controller('PostEditCtrl', ['$scope', '$http',
+    function ($scope, $http) {
 
-        $scope.phoneId = $routeParams.phoneId;
+        var post_id = document.getElementById('post_id').value;
+        $scope.post = {};
+        $scope.wordCount = 0;
+
+        $http.get('/admin/post/get/' + post_id).success(function(data) {
+            $scope.post = data;
+        });
+
+        /**
+         * Counts Words in Post Content
+         */
+        $scope.countWords = function() {
+            s = $scope.post.content;
+            s = s.replace(/(^\s*)|(\s*$)/gi,"");//exclude  start and end white-space
+            s = s.replace(/[ ]{2,}/gi," ");//2 or more space to 1
+            s = s.replace(/\n /,"\n"); // exclude newline with a start spacing
+
+            $scope.wordCount = s.split(' ').length;
+        };
+
+        /**
+         * Saves Post
+         */
+        $scope.savePost = function() {
+            console.log('saving post ' + post_id);
+        };
+
 
     }]);

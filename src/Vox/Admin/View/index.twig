@@ -15,11 +15,11 @@
 <!-- posts -->
 <div class="row" ng-repeat="post in posts">
     <div class="col-sm-10">
-        <h3><a ng-href="/admin/post/{[{ post.id }]}">{[{ post.title }]}</a></h3>
+        <h3><a ng-href="/admin/post/edit/{[{ post.id }]}">{[{ post.title }]}</a></h3>
         <h4><span class="label label-default">{[{ post.author }]}</span></h4>
         <div>{[{ post.excerpt }]}</div>
         <h4>
-            <small class="text-muted">{[{ post.date }]} • <a href="#" class="text-muted">{%  trans "Read More" %}</a></small>
+            <small class="text-muted">{[{ post.date }]} • <a ng-href="/admin/post/edit/{[{ post.id }]}" class="text-muted">{%  trans "Read More" %}</a></small>
         </h4>
     </div>
     <div class="col-sm-2">
@@ -27,24 +27,7 @@
     </div>
 </div>
 
-<hr>
-
-<div class="row" id="footer">
-    <div class="col-sm-6">
-
-    </div>
-    <div class="col-sm-6">
-        <p>
-            <span class="pull-right">
-                Vox CMS
-                - Made with passion in Berlin, Germany
-                - <a href="https://github.com/vox-project/vox/blob/master/LICENSE">Terms of use</a>
-            </span>
-        </p>
-    </div>
-</div>
-
-<hr>
+{% include 'Vox:Admin:footer' %}
 
 </div>
 
