@@ -1,4 +1,4 @@
-{% extends "Vox:Admin:template" %}
+{% extends "Vox:Admin:layout" %}
 
 {% block content %}
 
@@ -26,8 +26,6 @@
         <a href="#" class="pull-right"><img ng-src="{[{ getAuthorPicture(post.author_id) }]}" class="img-circle"></a>
     </div>
 </div>
-
-{% include 'Vox:Admin:footer' %}
 
 </div>
 

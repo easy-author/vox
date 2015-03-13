@@ -55,7 +55,7 @@ class BaseController
             return new ResponseRedirect($this->app->router()->make('admin'));
 
         } catch (\Exception $e) {
-            $this->flashbag->add($e->getMessage(), 'error');
+            $this->flashbag->add($e->getMessage(), 'danger');
 
             return $this->loginAction();
         }
@@ -66,14 +66,5 @@ class BaseController
         $this->security->destroy();
 
         return new ResponseRedirect($this->app->router()->make('admin'));
-    }
-
-    public function michalAction()
-    {
-        return new Response(
-            json_encode(['test' => 'michal']),
-            200,
-            'application/json'
-        );
     }
 } 
