@@ -101,7 +101,6 @@ return [
             'controller' => 'Vox\Front\Controller\BaseController@indexAction',
         ],
 
-
         'admin' => [
             'pattern' => '/admin/',
             'controller' => 'Vox\Admin\Controller\BaseController@indexAction',
@@ -124,6 +123,20 @@ return [
         'admin.logout' => [
             'pattern' => '/admin/logout/',
             'controller' => 'Vox\Admin\Controller\BaseController@logoutAction',
+        ],
+
+        // Posts
+        'post.list' => [
+            'pattern' => '/admin/post/list',
+            'controller' => 'Vox\Admin\Controller\PostController@listAction',
+        ],
+        'post.edit' => [
+            'pattern' => '/admin/post/edit/{id:[0-9]}',
+            'controller' => 'Vox\Admin\Controller\PostController@editAction',
+        ],
+        'post.get' => [
+            'pattern' => '/admin/post/get/{id:[0-9]}',
+            'controller' => 'Vox\Admin\Controller\PostController@getAction',
         ],
     ],
 ];

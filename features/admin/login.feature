@@ -21,7 +21,7 @@ Feature: Login/Logout
       | password | bar |
     And I press "Login"
     Then I should be on "/admin/login/"
-    And I should see an "li.message.error" element
+    And I should see an "li.alert-danger" element
 
   Scenario: Check "I am authenticated with" proper credentials
     Given I am authenticated with login "test" and password "test"
@@ -31,4 +31,4 @@ Feature: Login/Logout
   Scenario: Check "I am authenticated with" wrong credentials
     Given I am authenticated with login "foo" and password "bar"
     Then I should be on "/admin/login/"
-    And I should see an "li.message.error" element
+    And I should see an "li.alert-danger" element

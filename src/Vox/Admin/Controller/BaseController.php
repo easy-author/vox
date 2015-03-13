@@ -28,7 +28,9 @@ class BaseController
 
     public function indexAction()
     {
-        return new Response(sprintf('<a href="%s">Logout</a>', $this->app->router()->make('admin.logout')));
+        $this->view->template('Vox:Admin:index');
+
+        return new Response($this->view->render());
     }
 
     public function loginAction()
@@ -53,7 +55,7 @@ class BaseController
             return new ResponseRedirect($this->app->router()->make('admin'));
 
         } catch (\Exception $e) {
-            $this->flashbag->add($e->getMessage(), 'error');
+            $this->flashbag->add($e->getMessage(), 'danger');
 
             return $this->loginAction();
         }
