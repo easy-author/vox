@@ -4,10 +4,10 @@ return array(
         'storage:connection' => array(
             'component' => function () {
                 $connectionParams = [
-                    'dbname' => '@database@',
-                    'user' => '@user@',
-                    'password' => '@password@',
-                    'host' => '@host@',
+                    'dbname' => 'vox',
+                    'user' => 'user',
+                    'password' => 'pass',
+                    'host' => 'localhost',
                     'driver' => 'pdo_mysql',
                     'charset' => 'utf8'
                 ];
