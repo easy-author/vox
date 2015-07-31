@@ -1,0 +1,43 @@
+{#{% extends 'Vox:Admin:template' %}#}
+<link href="/web/css/bootstrap.min.css" rel="stylesheet">
+<link href="/web/css/styles.css" rel="stylesheet">
+
+{% block content %}
+
+    {% if flashbag.has %}
+        <ul id="flashbag">
+            {% for message in flashbag %}
+                <li class="alert alert-{{ message.type }}"><p>{{ message.message|translate }}</p></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <section class="center-block" style="text-align: center;">
+        <div class="page-header">
+
+            <img src="/web/images/logo.png">
+        </div>
+
+        <form action="{{ url('admin.login.auth') }}" method="post" class="form-inline">
+
+            <div class="form-group">
+                <label class="sr-only" for="login">{% trans "Login" %}</label>
+                <input type="text" class="form-control" id="login" name="login" placeholder="{% trans "Login" %}" required="required">
+            </div>
+
+            <div class="form-group">
+                <label class="sr-only" for="password">{% trans "Password" %}</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="{% trans "Password" %}" required="required">
+
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">{% trans "Login" %}</button>
+            </div>
+
+        </form>
+
+        <h4>Demo Credentials: <strong>test</strong> - <strong>test</strong></h4>
+
+    </section>
+{% endblock %}

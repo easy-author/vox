@@ -3,6 +3,8 @@
 	Options +FollowSymlinks
 	RewriteEngine On
 
+	RewriteRule ^resource/(.*)$ ./web/resource/$1 [L]
+
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteRule ^.*$ web/index.php
 </IfModule>

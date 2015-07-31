@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="voxApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <base href="{{ request.baseName }}">
+
+    <meta charset="utf-8">
+    <title>{% trans "Admin" %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    {% block style %}
+        <link href="/web/css/bootstrap.min.css" rel="stylesheet">
+        <!--[if lt IE 9]>
+        <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link href="/web/css/styles.css" rel="stylesheet">
+    {% endblock %}
+</head>
+<body>
+<div class="wrapper">
+    <div class="box">
+        <div class="row">
+
+            <!-- sidebar -->
+            <div class="column col-sm-3" id="sidebar">
+                <a class="logo" href="#">
+                    <img src="/web/images/v_round_white.png">
+                </a>
+                <br>
+                <ul class="nav">
+                    <li class="active">
+                        <a href="/admin/">{%  trans "Posts" %}</a>
+                    </li>
+                    <li>
+                        <a href="">{% trans "Settings" %}</a>
+                    </li>
+                    <li>
+                        <a href="/admin/logout">{% trans "Logout" %}</a>
+                    </li>
+                </ul>
+                <ul class="nav hidden-xs" id="sidebar-footer">
+
+                    <h3><img src="/web/images/logo_white_small.png"></h3>
+                    Vox's Admin theme is made with the <a href="http://www.bootply.com">Bootply theme</a>
+
+                </ul>
+            </div>
+            <!-- /sidebar -->
+
+            <!-- main -->
+            <div class="column col-sm-9" id="main">
+                <div class="padding">
+                    <div class="full col-sm-9">
+
+                        {% if flashbag.has %}
+                            <ul id="flashbag">
+                                {% for message in flashbag %}
+                                    <li class="message {{ message.type }}"><p>{{ message.message|translate }}</p></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+
+                        {% block content %}
+                        {% endblock %}
+
+                        {% include 'Vox:Admin:footer' %}
+
+                    </div>
+
+                </div><!-- /padding -->
+            </div>
+            <!-- /main -->
+
+        </div>
+    </div>
+</div>
+<!-- script references -->
+{% block script %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+    <script src="//code.angularjs.org/1.3.8/angular-route.min.js"></script>
+    <script src="/web/js/bootstrap.min.js"></script>
+    <script src="/web/js/app.js"></script>
+    <script src="/web/js/controllers.js"></script>
+{% endblock %}
+
+</body>
+</html>

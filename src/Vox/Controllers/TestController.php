@@ -15,10 +15,4 @@ class TestController extends BaseController {
 
     }
 
-    public function testAction() {
-
-        return new Response('This is the test controller / test action');
-
-    }
-
 } 

@@ -1,0 +1,43 @@
+{% extends "Vox:Admin:layout" %}
+
+{% block content %}
+
+    <div ng-controller="PostEditCtrl">
+
+        <input type="hidden" id="post_id" value="{{ post_id }}">
+
+        <!-- content -->
+
+        <div class="col-sm-12" id="featured">
+            <div class="page-header">
+                <input type="text" ng-model="post.title" class="form-control input-lg" placeholder="{% trans "Title" %}">
+            </div>
+        </div>
+
+        <!-- posts -->
+        <div class="row">
+            <div class="col-sm-10">
+                <textarea name="excerpt" ng-model="post.excerpt" class="form-control" placeholder="{% trans "Excerpt" %}"></textarea><br>
+                <textarea
+                        name="content"
+                        ng-model="post.content"
+                        ng-change="countWords()"
+                        class="form-control"
+                        rows="15"
+                        placeholder="{% trans "Content" %}">
+                </textarea>
+                <span ng-show="wordCount > 0" id="wordCount" class="help-block">{% trans "Words" %}: {[{ wordCount }]}</span>
+
+                <br><br>
+                <button type="submit" class="btn btn-primary btn-lg" ng-submit="savePost()">{% trans "Save" %}</button>
+
+            </div>
+            <div class="col-sm-2">
+                <!-- this column is to be used for more controls in the future -->
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}

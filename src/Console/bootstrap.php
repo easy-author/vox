@@ -3,30 +3,22 @@ use Moss\Container\ContainerInterface;
 
 return array(
     'container' => array(
-        'storage' => array(
+        'schema' => array(
             'component' => function (ContainerInterface $container) {
-                    $storage = new \Moss\Storage\StorageQuery(
-                        $container->get('pdo'),
-                        new \Moss\Storage\Builder\MySQL\QueryBuilder()
-                    );
-
-                    $var = $container->get('config')
-                        ->get('container');
-
-                    foreach (array_keys($var) as $model) {
-                        if (strpos($model, 'storage:') !== 0) {
-                            continue;
-                        }
-
-                        $storage->register($container->get($model), substr($model, 8));
-                    }
-
-                    return $storage;
-                },
+                return new \Moss\Storage\Schema\Schema(
+                    $container->get('storage:connection'),
+                    $container->get('storage:modelbag')
+                );
+            },
             'shared' => true
-        ),
+        )
     ),
     'router' => array(
+        'database:configure' => array(
+            'pattern' => 'database:configure',
+            'controller' => 'Console\Controller\StorageController@configureAction',
+            'methods' => array('cli'),
+        ),
         'database:create' => array(
             'pattern' => 'database:create',
             'controller' => 'Console\Controller\StorageController@createAction',
@@ -41,6 +33,12 @@ return array(
             'pattern' => 'database:drop',
             'controller' => 'Console\Controller\StorageController@dropAction',
             'methods' => array('cli'),
-        )
+        ),
+
+        'fixtures:user' => array(
+            'pattern' => 'fixtures:user',
+            'controller' => 'Console\Controller\FixtureController@userAction',
+            'methods' => array('cli'),
+        ),
     ),
 );
