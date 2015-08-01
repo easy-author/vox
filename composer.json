@@ -15,10 +15,10 @@
   "prefer-stable": true,
   "require": {
     "php": ">=5.4.0",
-    "moss/framework": ">=1.1",
+    "moss/framework": ">=1.2",
     "moss/storage": "dev-dev",
-    "moss/locale": ">=1",
-    "moss/twig-bridge": ">=1.1"
+    "moss/locale": ">=2",
+    "moss/twig-bridge": ">=1.2"
   },
   "require-dev": {
     "phpspec/phpspec": "~2.0",

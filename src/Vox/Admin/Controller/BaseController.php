@@ -8,14 +8,31 @@ namespace Vox\Admin\Controller;
 
 use Moss\Http\Response\Response;
 use Moss\Http\Response\ResponseRedirect;
+use Moss\Http\Session\FlashBagInterface;
 use Moss\Kernel\AppInterface;
+use Moss\Security\SecurityInterface;
+use Moss\View\ViewInterface;
 
 class BaseController
 {
-
+    /**
+     * @var AppInterface
+     */
     protected $app;
+
+    /**
+     * @var SecurityInterface
+     */
     protected $security;
+
+    /**
+     * @var FlashBagInterface
+     */
     protected $flashbag;
+
+    /**
+     * @var ViewInterface
+     */
     protected $view;
 
     public function __construct(AppInterface $app)
@@ -24,6 +41,10 @@ class BaseController
         $this->security = $this->app->get('security');
         $this->flashbag = $this->app->get('flashbag');
         $this->view = $this->app->get('view');
+
+        if($this->security->user()) {
+            $this->view->set('navigation', $this->app->get('navigation')->build());
+        }
     }
 
     public function indexAction()

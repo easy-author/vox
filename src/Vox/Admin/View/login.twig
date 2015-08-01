@@ -1,6 +1,4 @@
-{#{% extends 'Vox:Admin:template' %}#}
-<link href="/web/css/bootstrap.min.css" rel="stylesheet">
-<link href="/web/css/styles.css" rel="stylesheet">
+{% extends 'Vox:Admin:layout' %}
 
 {% block content %}
 
@@ -15,7 +13,7 @@
     <section class="center-block" style="text-align: center;">
         <div class="page-header">
 
-            <img src="/web/images/logo.png">
+            <img src="{{  asset('/images/logo.png') }}">
         </div>
 
         <form action="{{ url('admin.login.auth') }}" method="post" class="form-inline">

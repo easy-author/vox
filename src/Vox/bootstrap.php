@@ -2,6 +2,12 @@
 use Moss\Container\ContainerInterface;
 
 return [
+    'framework' => [
+        'error' => [
+            'level' => -1,
+            'detail' => false
+        ],
+    ],
     'container' => [
         'path' => [
             'app' => __DIR__ . '/../../src',
@@ -23,7 +29,7 @@ return [
                 $twig = new Twig_Environment(new Moss\Bridge\Loader\File(__DIR__ . '/../{bundle}/{directory}/View/{file}.twig'), $options);
                 $twig->setExtensions(
                     [
-                        new Moss\Bridge\Extension\Resource(),
+                        new Moss\Bridge\Extension\Asset(),
                         new Moss\Bridge\Extension\Url($container->get('router')),
                         new Moss\Bridge\Extension\Trans(),
                         new Twig_Extensions_Extension_Text(),
@@ -69,6 +75,17 @@ return [
                 return new \Vox\Admin\Repository\UserRepository($container->get('storage'));
             }
         ],
+        'navigation' => [
+            'component' => function (ContainerInterface $container) {
+                $categories = [
+                    ['Posts', 'admin'],
+                    ['Settings'],
+                    ['Logout', 'admin.logout']
+                ];
+
+                return new \Vox\Service\Navigation\Navigation($categories);
+            }
+        ]
     ],
     'dispatcher' => [
         'kernel.route' => [
@@ -105,11 +122,7 @@ return [
             'pattern' => '/admin/',
             'controller' => 'Vox\Admin\Controller\BaseController@indexAction',
         ],
-// TODO - this should be enabled on Moss 1.2
-//        'adminDynamic' => new \Vox\Router\DynamicRoute(
-//            '/admin/{controller}/({action})',
-//            '\\Vox\\Admin\\Controller\\{controller}Controller@{action}Action'
-//        ),
+
         'admin.login.form' => [
             'pattern' => '/admin/login/',
             'controller' => 'Vox\Admin\Controller\BaseController@loginAction',
@@ -138,5 +151,11 @@ return [
             'pattern' => '/admin/post/get/{id:[0-9]}',
             'controller' => 'Vox\Admin\Controller\PostController@getAction',
         ],
+
+        // this must be last
+        'adminDynamic' => new \Vox\Router\DynamicRoute(
+            '/admin/{controller}/({action})',
+            '\\Vox\\Admin\\Controller\\{controller}Controller@{action}Action'
+        ),
     ],
 ];
