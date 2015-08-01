@@ -1,0 +1,8 @@
+filter:
+    excluded_paths:
+        - 'features/*'
+        - 'spec/*'
+checks:
+    php: true
+coding_style:
+    php: {  }
